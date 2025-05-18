@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title       = 'Accessibility Statement — Smash Karts Unblocked';
+const description = 'Our commitment to accessibility: how we ensure Smash Karts Unblocked is usable by people with disabilities.';
+const canonical   = 'https://unblockedsmashkarts.com/accessibility';
+---
+<Layout {title} {description} {canonical}>
+  <Navbar slot="navbar" />
+
+  <main class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 container mx-auto px-4 py-12 space-y-6">
+    <h1 class="text-4xl font-extrabold text-emerald-700 dark:text-emerald-300 mb-4">
+      Accessibility Statement
+    </h1>
+    <p class="mb-4">
+      We strive to make <strong>Smash Karts Unblocked</strong> accessible to all users, including those with disabilities.
+    </p>
+    <ul class="list-disc list-inside mb-4 space-y-2">
+      <li>All text has sufficient contrast ratios.</li>
+      <li>Interactive elements are labeled and keyboard-navigable.</li>
+      <li>Images and iframes include descriptive alt text or titles.</li>
+      <li>Responsive design adapts to screen readers and magnifiers.</li>
+    </ul>
+    <p>
+      If you encounter any barriers, please contact us at{' '}
+      <a
+        href="mailto:contact@unblockedsmashkarts.com"
+        class="text-emerald-600 dark:text-emerald-400 underline"
+      >
+        contact@unblockedsmashkarts.com
+      </a>.
+    </p>
+  </main>
+
+  <Footer slot="footer" />
+</Layout>

@@ -1,0 +1,102 @@
+---
+/** src/components/Navbar.astro **/
+---
+
+<nav class="bg-emerald-600 dark:bg-emerald-800 text-white shadow-md">
+  <div class="max-w-6xl mx-auto flex items-center justify-between p-4 relative">
+    <!-- Logo + Title -->
+    <a href="/" class="flex items-center hover:underline">
+      <img
+        src="/smash-karts-unblocked.webp"
+        alt="Smash Karts Unblocked logo"
+        loading="lazy"
+        class="w-8 h-8 md:w-10 md:h-10 mr-2"
+      />
+      <span class="text-xl font-bold">Smash Karts Unblocked</span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden sm:flex items-center space-x-6">
+      <a href="/" class="hover:underline">Home</a>
+      <a href="/guide" class="hover:underline">Guide</a>
+      <a href="/play" class="hover:underline">Play</a>
+      <!-- Desktop dark/light toggle -->
+      <button
+        data-dark-toggle
+        aria-label="Toggle dark mode"
+        class="relative w-20 h-6 bg-white bg-opacity-25 dark:bg-black dark:bg-opacity-25 rounded-full p-1 transition-colors"
+      >
+        <span class="block w-4 h-4 bg-white dark:bg-emerald-400 rounded-full shadow transform transition-transform dark:translate-x-14"></span>
+        <span class="absolute inset-0 flex items-center justify-center text-xs font-medium text-white pointer-events-none">
+          Light
+        </span>
+      </button>
+    </div>
+
+    <!-- Mobile controls -->
+    <div class="sm:hidden flex items-center space-x-2" id="navbar-mobile">
+      <!-- Mobile dark toggle -->
+      <button
+        data-dark-toggle
+        aria-label="Toggle dark mode"
+        class="w-8 h-8 flex items-center justify-center bg-white bg-opacity-25 dark:bg-black dark:bg-opacity-25 rounded-full transition-colors"
+      >
+        🌙
+      </button>
+
+      <!-- Hamburger -->
+      <button
+        id="menu-button"
+        aria-label="Toggle menu"
+        class="w-8 h-8 flex items-center justify-center bg-white bg-opacity-25 dark:bg-black dark:bg-opacity-25 rounded-full transition-colors"
+      >
+        <div class="space-y-1">
+          <span class="block w-5 h-0.5 bg-white"></span>
+          <span class="block w-5 h-0.5 bg-white"></span>
+          <span class="block w-5 h-0.5 bg-white"></span>
+        </div>
+      </button>
+
+      <!-- Pop-up menu -->
+      <div
+        id="mobile-menu"
+        class="absolute top-full right-4 mt-2 w-40 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg shadow-lg z-50 py-2 opacity-0 scale-95 pointer-events-none transform transition-all duration-200"
+      >
+        <a href="/" class="block px-4 py-2 hover:bg-emerald-100 dark:hover:bg-gray-700">Home</a>
+        <a href="/guide" class="block px-4 py-2 hover:bg-emerald-100 dark:hover:bg-gray-700">Guide</a>
+        <a href="/play" class="block px-4 py-2 hover:bg-emerald-100 dark:hover:bg-gray-700">Play</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script type="module">
+  // Dark mode toggles
+  const darkToggles = document.querySelectorAll('[data-dark-toggle]');
+  const htmlEl = document.documentElement;
+  if (localStorage.getItem('dark') === 'true') {
+    htmlEl.classList.add('dark');
+  }
+  darkToggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isDark = htmlEl.classList.toggle('dark');
+      localStorage.setItem('dark', isDark);
+    });
+  });
+
+  // Mobile menu open/close
+  const menuBtn = document.getElementById('menu-button');
+  const menu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const opened = menu.classList.toggle('opacity-100') && menu.classList.toggle('scale-100');
+    menu.classList.toggle('pointer-events-none', !opened);
+  });
+  // Close menu on outside click
+  document.addEventListener('click', e => {
+    if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+      menu.classList.remove('opacity-100', 'scale-100');
+      menu.classList.add('pointer-events-none');
+    }
+  });
+</script>

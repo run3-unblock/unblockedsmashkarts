@@ -1,16 +1,339 @@
 ---
+import Layout    from '../layouts/Layout.astro';
+import Navbar    from '../components/Navbar.astro';
+import Footer    from '../components/Footer.astro';
+import GameFrame from '../components/GameFrame.astro';
 
+/* ─────────────────────────  META  ───────────────────────── */
+const title       = 'Smash Karts Unblocked – Free Online Multiplayer Kart Battles';
+const description = 'Play Smash Karts Unblocked now—no ads. Race, drift, snag power-ups, blast rivals in three-minute fun arenas on school Wi-Fi or any Chromebook, free forever.';
+const canonical   = 'https://unblockedsmashkarts.com/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      url: canonical,
+      name: 'Smash Karts Unblocked',
+      description: description,
+      inLanguage: 'en',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${canonical}?s={search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      }
+    },
+    {
+      '@type': 'VideoGame',
+      name: 'Smash Karts Unblocked',
+      url: canonical,
+      operatingSystem: 'ANY',
+      applicationCategory: 'Game',
+      gamePlatform: ['Web'],
+      genre: ['Action', 'Multiplayer', '.io'],
+      author: { '@type': 'Organization', name: 'Tall Team Games' },
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is Smash Karts Unblocked safe to play at school?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes. The game is served over HTTPS, contains no ads, and bypasses many filters.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Do I need to install anything to play Smash Karts online?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Nothing to install—click “Play Now” and the WebGL build loads instantly in-browser.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Does Smash Karts save my progress?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Unlocks are stored in local storage. Clearing site data resets progress.'
+          }
+        }
+      ]
+    }
+  ]
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: canonical }
+  ]
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<!-- ───────────── INLINE HELPER SCRIPT ───────────── -->
+<script is:inline>
+  /* Cross-browser fullscreen for iframe #smashkarts-frame */
+  function goFullscreen() {
+    const frame = document.getElementById('smashkarts-frame');
+    if (!frame) return;
+    (frame.requestFullscreen ||
+     frame.webkitRequestFullscreen ||
+     frame.mozRequestFullScreen ||
+     frame.msRequestFullscreen
+    )?.call(frame);
+  }
+</script>
+
+<Layout {title} {description} {canonical} {jsonLd} {breadcrumbLd}>
+  <Navbar slot="navbar" />
+
+  <main class="bg-gradient-to-b from-emerald-500 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-200">
+
+    <!-- GAME IFRAME -->
+ <section id="game" class="mx-auto max-w-screen-xl px-4 py-12">
+  <h2 class="sr-only">Play Smash Karts Unblocked Online Free</h2>
+  <h1 class="text-4xl md:text-5xl font-extrabold text-center text-white dark:text-gray-100 leading-tight mb-4">
+    Smash Karts <span class="text-yellow-300">Unblocked</span> — Free Online Multiplayer Kart Battles
+  </h1>
+  <p class="text-center mb-12 text-lg text-white/90 dark:text-gray-200/90">
+    Play Smash Karts Unblocked free—no ads, no downloads. Race, drift, blast rivals in 3-minute arenas on school Wi-Fi, Chromebooks or mobile.
+  </p>
+  <div class="flex justify-center">
+        <GameFrame
+          frameId="smashkarts-frame"
+          src="https://webgltest-17af1.firebaseapp.com/"
+          class="w-full max-w-screen-lg h-[500px] md:h-[650px] rounded-xl overflow-hidden shadow-lg transition-all duration-300"
+        />
+      </div>
+      <div class="flex justify-center mt-6">
+        <button
+          type="button"
+          onclick="goFullscreen()"
+          class="inline-flex items-center bg-gradient-to-r from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8 3H5a2 2 0 00-2 2v3m0 8v3a2 2 0 002 2h3
+                     m8-16h3a2 2 0 012 2v3m0 8v3a2 2 0 01-2 2h-3"/>
+          </svg>
+          <span class="ml-2">Fullscreen</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- HERO -->
+    <section id="hero" class="text-center py-20 px-4">
+      <img
+        src="/smash-karts-unblocked.webp"
+        alt="Cartoon racers firing rockets in Smash Karts Unblocked"
+        loading="lazy"
+        class="mx-auto mb-8 w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
+      />
+  <p class="mt-6 max-w-2xl mx-auto text-lg text-white/90 dark:text-gray-200/90">
+  Gear up for chaotic kart combat! In <strong>Smash&nbsp;Karts Unblocked</strong> you’ll rocket, drift, and drop mines against live players in fast 3-minute arenas. Full-screen, ad-free and install-free—play instantly on Chromebooks, phones, or school Wi-Fi.
+</p>
+      <a
+        href="#game"
+        class="mt-10 inline-block bg-yellow-400 text-black font-semibold py-3 px-10 rounded-full shadow-lg hover:bg-yellow-300 transition"
+      >
+        Play Now
+      </a>
+      <p class="mt-3 text-sm text-white/80 dark:text-gray-400">
+        <strong>Trending:</strong> smash karts unblocked • smash karts unblocked free • smash karts io
+      </p>
+    </section>
+
+    <!-- WHAT IS SMASH KARTS -->
+    <section id="about" class="max-w-5xl mx-auto px-4 py-20 space-y-10 text-gray-700 dark:text-gray-300">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-gray-100">What Is Smash Karts?</h2>
+      <p class="leading-relaxed">
+        Smash Karts is an adrenaline-fueled <strong>multiplayer kart-shooter</strong>. Drift through colorful arenas, collect weapon crates, and annihilate opponents to seize the crown. Each round lasts just three minutes—perfect for quick sessions at school, work, or on mobile.
+      </p>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">Why Play Here?</h3>
+          <ul class="list-disc list-inside space-y-3">
+            <li><strong>Ad-Free:</strong> zero pop-ups or forced videos.</li>
+            <li><strong>School-Safe:</strong> HTTPS + domain masking bypasses filters.</li>
+            <li><strong>Chromebook-Ready:</strong> WebGL runs smoothly on ChromeOS.</li>
+            <li><strong>Instant Fullscreen:</strong> one-tap immersive mode.</li>
+            <li><strong>Free Forever:</strong> no paywalls or sign-ups.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">Core Highlights</h3>
+          <ul class="list-disc list-inside space-y-3">
+            <li>Random weapons: rockets, mines, machine gun, shields & more.</li>
+            <li>Level-up for new karts, hats & skins.</li>
+            <li>Rotating arenas keep every match fresh.</li>
+            <li>Private lobbies for friends.</li>
+            <li>Cross-platform: desktop, tablet & phone.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROLS & POWER-UPS -->
+    <section id="controls" class="bg-gray-50 dark:bg-gray-800 py-20 px-4">
+      <div class="max-w-4xl mx-auto space-y-8 text-gray-800 dark:text-gray-200">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-8">Controls & Power-Ups 🎮</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Keyboard / Gamepad</h3>
+            <ul class="list-disc list-inside space-y-3">
+              <li><kbd>WASD</kbd> or <kbd>←↑↓→</kbd> — steer</li>
+              <li><kbd>Space</kbd> / <kbd>Click</kbd> — fire</li>
+              <li><kbd>Shift</kbd> — drift-boost</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Power-Up Odds</h3>
+            <ul class="list-disc list-inside space-y-3">
+              <li>Rockets (common)</li>
+              <li>Machine Gun (common)</li>
+              <li>Mines (uncommon)</li>
+              <li>Invincibility (rare)</li>
+              <li>Giant Hammer (legendary)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRO TIPS -->
+    <section id="tips" class="bg-white dark:bg-gray-700 py-20 px-4">
+      <div class="max-w-4xl mx-auto text-gray-800 dark:text-gray-200 space-y-8">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-gray-100">Pro Tips to Dominate Every Match 🏆</h2>
+        <ul class="list-disc list-inside space-y-4">
+          <li><strong>Master the Drift:</strong> hold <kbd>Shift</kbd> through corners for speed and a micro-boost.</li>
+          <li><strong>Weapon Cycling:</strong> if you have rockets, grab another crate to re-roll.</li>
+          <li><strong>Arena Awareness:</strong> hearts spawn at edges—retreat, heal, strike.</li>
+          <li><strong>Third-Party Effect:</strong> watch two opponents, then finish the survivor.</li>
+          <li><strong>Private Scrims:</strong> practice timings in friend lobbies before ranked.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ARENA ROTATION -->
+    <section id="arenas" class="bg-gray-50 dark:bg-gray-800 py-20 px-4">
+      <div class="max-w-5xl mx-auto text-gray-800 dark:text-gray-200 space-y-8">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-gray-100">Current Arena Rotation 🗺️</h2>
+        <div class="grid sm:grid-cols-2 gap-8">
+          <article class="p-6 bg-white dark:bg-gray-900 rounded-xl shadow-inner">
+            <h3 class="font-semibold text-xl mb-2">Whisky Wharf</h3>
+            <p>Compact piers, tight corners—perfect for mines.</p>
+          </article>
+          <article class="p-6 bg-white dark:bg-gray-900 rounded-xl shadow-inner">
+            <h3 class="font-semibold text-xl mb-2">Nova Drome</h3>
+            <p>Wide lanes + jump pads—rockets reign.</p>
+          </article>
+          <article class="p-6 bg-white dark:bg-gray-900 rounded-xl shadow-inner">
+            <h3 class="font-semibold text-xl mb-2">Pixel Plaza</h3>
+            <p>Symmetrical grid—charge main street with invincibility.</p>
+          </article>
+          <article class="p-6 bg-white dark:bg-gray-900 rounded-xl shadow-inner">
+            <h3 class="font-semibold text-xl mb-2">Graveyard Shift</h3>
+            <p>Foggy night—mines blend in for chaos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERFORMANCE TWEAKS -->
+    <section id="performance" class="bg-white dark:bg-gray-700 py-20 px-4">
+      <div class="max-w-4xl mx-auto text-gray-700 dark:text-gray-300 space-y-8">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-gray-100">Boost FPS on Low-End Devices ⚙️</h2>
+        <ol class="list-decimal list-inside space-y-4">
+          <li><strong>Disable Extensions:</strong> ad-blockers/theme addons eat GPU in WebGL.</li>
+          <li><strong>Use Chrome/Edge:</strong> latest Chromium gives fastest WebGL.</li>
+          <li><strong>Close Extra Tabs:</strong> free RAM equals smoother frames.</li>
+          <li><strong>Press <kbd>L</kbd>:</strong> toggle low graphics in-game.</li>
+          <li><strong>Install as PWA:</strong> browser menu → “Install App.”</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- HOW TO UNBLOCK -->
+    <section id="unblock-guide" class="bg-gray-50 dark:bg-gray-800 py-20 px-4">
+      <div class="max-w-4xl mx-auto space-y-8 text-gray-800 dark:text-gray-200">
+        <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-gray-100">How to Play at School (or Anywhere) 🛡️</h2>
+        <ol class="list-decimal list-inside space-y-4">
+          <li><strong>HTTPS First:</strong> our domain is SSL-encrypted—many filters whitelist it.</li>
+          <li><strong>Reader Mode:</strong> masks WebGL as text (Chrome Ctrl+Shift+R).</li>
+          <li><strong>Incognito + VPN:</strong> combine for stubborn firewalls.</li>
+          <li><strong>Clear Cache:</strong> wipe local progress when needed.</li>
+          <li><strong>PWA Offline:</strong> install → disable Wi-Fi → launch for practice.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- TOP SEARCHES -->
+    <section id="keywords" class="bg-white dark:bg-gray-700 py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-900 dark:text-gray-100">🔥 Most-Searched Smash Karts Keywords (2025)</h2>
+        <ul class="grid sm:grid-cols-2 gap-4 text-gray-800 dark:text-gray-200">
+          <li class="bg-yellow-100 dark:bg-emerald-900/30 px-4 py-2 rounded-md shadow-inner">🔍 smash karts unblocked</li>
+          <li class="bg-yellow-100 dark:bg-emerald-900/30 px-4 py-2 rounded-md shadow-inner">🔍 smash karts unblocked free</li>
+          <li class="bg-yellow-100 dark:bg-emerald-900/30 px-4 py-2 rounded-md shadow-inner">🔍 smash karts io</li>
+          <li class="bg-yellow-100 dark:bg-emerald-900/30 px-4 py-2 rounded-md shadow-inner">🔍 play smash karts at school</li>
+          <li class="bg-yellow-100 dark:bg-emerald-900/30 px-4 py-2 rounded-md shadow-inner">🔍 smash karts multiplayer free</li>
+          <li class="bg-yellow-100 dark:bg-emerald-900/30 px-4 py-2 rounded-md shadow-inner">🔍 smash karts hacks & tips</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="bg-emerald-100 dark:bg-gray-900 py-20 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-10 text-gray-900 dark:text-gray-100">What Players Say 💬</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <figure class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <blockquote class="italic mb-4">“Best place to grind XP during computer lab.”</blockquote>
+            <figcaption class="text-right font-semibold">— Alex B.</figcaption>
+          </figure>
+          <figure class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <blockquote class="italic mb-4">“Loads way faster than the GitHub version—nice!”</blockquote>
+            <figcaption class="text-right font-semibold">— Jordan L.</figcaption>
+          </figure>
+          <figure class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
+            <blockquote class="italic mb-4">“Fullscreen button actually works on my Chromebook.”</blockquote>
+            <figcaption class="text-right font-semibold">— Casey M.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="bg-white dark:bg-gray-700 py-20 px-4">
+      <div class="max-w-4xl mx-auto">   
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">Frequently Asked Questions</h2>
+        <details class="mb-5 bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-inner">
+          <summary class="cursor-pointer font-medium text-gray-900 dark:text-gray-100">Is Smash Karts Unblocked legal?</summary>
+          <p class="mt-3 text-gray-700 dark:text-gray-300 leading-relaxed">Yes. We embed the official web build and never redistribute paid content.</p>
+        </details>
+        <details class="mb-5 bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-inner">
+          <summary class="cursor-pointer font-medium text-gray-900 dark:text-gray-100">Will this work on my phone?</summary>
+          <p class="mt-3 text-gray-700 dark:text-gray-300 leading-relaxed">Absolutely. The WebGL build auto-scales for touch and gamepads.</p>
+        </details>
+        <details class="mb-5 bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-inner">
+          <summary class="cursor-pointer font-medium text-gray-900 dark:text-gray-100">How do I get new karts & skins?</summary>
+          <p class="mt-3 text-gray-700 dark:text-gray-300 leading-relaxed">Earn XP to level up and unlock cosmetics, or open the free shop for rotating drops.</p>
+        </details>
+        <details class="mb-5 bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-inner">
+          <summary class="cursor-pointer font-medium text-gray-900 dark:text-gray-100">Fullscreen button still isn’t working—why?</summary>
+          <p class="mt-3 text-gray-700 dark:text-gray-300 leading-relaxed">Some browsers block fullscreen until you interact with the page—click inside the game then try again.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer slot="footer" />
+</Layout>

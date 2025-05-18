@@ -2,13 +2,23 @@
   "name": "smash-karts-unblocked-astro",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "format": "prettier --write \"**/*.{astro,js,ts,css,md}\""
   },
   "dependencies": {
     "astro": "^5.7.13"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.4.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro-robots-txt": "^1.0.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^3.4.17"
   }
 }

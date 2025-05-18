@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title       = 'About Us — Smash Karts Unblocked';
+const description = 'Meet the team behind Smash Karts Unblocked: our mission to deliver an ad-free, school-friendly kart shooter experience on Chromebooks and firewalled networks.';
+const canonical   = 'https://unblockedsmashkarts.com/about-us';
+---
+<Layout {title} {description} {canonical}>
+  <Navbar slot="navbar" />
+
+  <main class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-16 px-4">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-10">
+      <h1 class="text-4xl font-extrabold text-emerald-700 dark:text-emerald-400 mb-6 text-center">
+        About Us
+      </h1>
+
+      <section class="space-y-6">
+        <p>
+          Welcome to <strong>Smash Karts Unblocked</strong>—a fan-built project by
+          gamers, developers, and educators who love fast-paced kart shooters
+          and needed a truly ad-free, school-friendly, and lightning-fast
+          version you can play behind any firewall.
+        </p>
+
+        <p>Our mission is simple:</p>
+        <ul class="list-disc list-inside space-y-2 pl-4">
+          <li>No ads, pop-ups, or forced videos.</li>
+          <li>End-to-end HTTPS delivery for seamless access on restricted networks.</li>
+          <li>Chromebook-optimized, mobile-first Progressive Web App (PWA).</li>
+          <li>Free forever—no paywalls, registrations, or data traps.</li>
+        </ul>
+
+        <p>
+          We are not affiliated with Tall Team Games, the official Smash Karts
+          developers. We’re simply passionate fans providing a reliable mirror
+          and enhanced UX for all players—students, teachers, and casual gamers alike.
+        </p>
+
+        <p>
+          Have questions or feedback?{' '}
+          <a href="/contact-us" class="text-emerald-600 underline">
+            Get in touch
+          </a>
+          , and we’ll be happy to help!
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <Footer slot="footer" />
+</Layout>

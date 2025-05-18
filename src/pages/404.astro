@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const title       = 'Page Not Found — 404';
+const description = 'Oops! That page can’t be found on Smash Karts Unblocked.';
+const canonical   = 'https://unblockedsmashkarts.com/404';
+---
+<Layout {title} {description} {canonical}>
+  <Navbar slot="navbar" />
+
+  <div class="flex flex-col items-center justify-start min-h-screen pt-20 bg-gray-50 dark:bg-gray-900 p-4">
+    <h1 class="text-6xl font-bold text-gray-800 dark:text-gray-100 mb-4">404</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+      Oops! That page can’t be found on Smash Karts Unblocked.
+    </p>
+    <a
+      href="/"
+      class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition"
+    >
+      Go back home
+    </a>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

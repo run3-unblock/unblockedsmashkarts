@@ -1,0 +1,24 @@
+---
+/*
+  Props
+    • src      (string, required) – WebGL game URL
+    • class    (string, optional) – extra Tailwind / CSS for the wrapper
+    • frameId  (string, optional) – id for the <iframe>; default "game-frame"
+*/
+const {
+  src,
+  class: cls = '',
+  frameId = 'game-frame'
+} = Astro.props;
+---
+
+<div class={`relative ${cls}`}>
+  <iframe
+    id={frameId}                 /* exposed for the fullscreen script */
+    src={src}
+    loading="lazy"
+    allow="autoplay; fullscreen"
+    allowfullscreen
+    class="absolute inset-0 w-full h-full bg-black border-0"
+  />
+</div>
